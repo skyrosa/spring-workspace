@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 
+//@Configuration
 public class DataSourceConfig {
 
 	@Bean

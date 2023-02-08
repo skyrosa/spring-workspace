@@ -1,9 +1,9 @@
 package com.example.springbootweb.controllers;
 
-import java.awt.PageAttributes.MediaType;
 import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +28,7 @@ public class StudentController {
 		List<Student> studentList = response.block();
 		model.addAttribute("students", studentList);
 		return "students";
+	}
 		
 	@GetMapping("/addStudent")
 	public String addStudent(Model model) {
@@ -36,7 +37,7 @@ public class StudentController {
 	}
 		
 	@PostMapping("/addStudent")
-	public String addStudent(Student student, Model model)
+	public String addStudent(Student student, Model model) {
 		Mono<Student> response = this.webClient.post()
 				.uri("/student/students")
 				.accept(MediaType.APPLICATION_JSON)
@@ -44,7 +45,7 @@ public class StudentController {
 				.retrieve()
 				.bodyToMono(new ParameterizedTypeReference<Student>( ) {});
 		Student createdStudent = response.block();
-		model.addAllAttributes("student", createdStudent)
+		model.addAttribute("student", createdStudent);
 		return "student";
 	}
 	
